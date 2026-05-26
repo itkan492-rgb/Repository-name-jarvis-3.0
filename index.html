@@ -37,14 +37,28 @@ font-size:18px;
 color:lime;
 margin-top:20px;
 font-size:20px;
+} 
+  .orb{
+width:180px;
+height:180px;
+background:radial-gradient(circle,#ff00ff,#6a00ff);
+border-radius:50%;
+margin:20px auto;
+animation:pulse 2s infinite;
+box-shadow:0 0 40px #ff00ff;
 }
 
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
 </style>
 
 </head>
 
 <body>
-
+<div class="orb"></div>
 <h1>FRIDAY AI</h1>
 
 <p>Welcome Rahul 👋</p>
