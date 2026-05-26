@@ -105,7 +105,7 @@ if(command.includes("hello") || command.includes("friday")){
 reply = "Hello Rahul, main Friday AI ready hoon";
 }
 
-speech = new SpeechSynthesisUtterance(reply);
+let speech = new SpeechSynthesisUtterance(reply);
 speech.lang = "hi-IN";
 window.speechSynthesis.speak(speech);
 
