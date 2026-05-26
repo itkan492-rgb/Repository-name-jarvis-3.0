@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>FRIDAY AI</title>
 
 <style>
 
 body{
+margin:0;
+padding:0;
 background:black;
-color:white;
 font-family:Arial;
-text-align:center;
 overflow:hidden;
+}
+
+.container{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
 h1{
 color:cyan;
-margin-top:20px;
+font-size:42px;
 text-shadow:0 0 20px cyan;
+margin-top:20px;
 }
 
 .orb{
 width:180px;
 height:180px;
-margin:40px auto;
 border-radius:50%;
 background:radial-gradient(circle,#ff00ff,#00ffff);
 box-shadow:0 0 50px #00ffff;
@@ -37,42 +48,67 @@ top:-15px;
 left:-15px;
 width:210px;
 height:210px;
-border:3px solid #ff0080;
 border-radius:50%;
+border:3px solid #ff0080;
 animation:rotate 4s linear infinite;
 }
 
 @keyframes rotate{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
+0%{
+transform:rotate(0deg);
+}
+100%{
+transform:rotate(360deg);
+}
 }
 
 @keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.1);}
-100%{transform:scale(1);}
+0%{
+transform:scale(1);
+}
+50%{
+transform:scale(1.1);
+}
+100%{
+transform:scale(1);
+}
 }
 
 button{
-width:220px;
+width:240px;
 padding:15px;
 margin:10px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 background:cyan;
 font-size:18px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 15px cyan;
+}
+
+button:hover{
+background:#00ffff;
+transform:scale(1.05);
 }
 
 .status{
 color:lime;
-font-size:20px;
+font-size:22px;
 margin-top:20px;
+}
+
+p{
+color:white;
+font-size:18px;
 }
 
 </style>
 </head>
 
 <body>
+
+<div class="container">
 
 <div class="orb"></div>
 
@@ -84,21 +120,19 @@ margin-top:20px;
 🎤 Start Voice
 </button>
 
-<br>
-
-<button>
+<button onclick="openChat()">
 💬 Open Chat
 </button>
 
-<br>
-
-<button>
+<button onclick="openTerminal()">
 💻 Open Terminal
 </button>
 
 <p class="status">
 System Ready ✅
 </p>
+
+</div>
 
 <script>
 
@@ -116,10 +150,28 @@ recognition.onresult=function(event){
 let text =
 event.results[0][0].transcript;
 
+let reply = "Hello Rahul";
+
+if(text.includes("hello") || text.includes("friday")){
+reply = "Hello Rahul, main FRIDAY AI ready hoon";
+}
+
+if(text.includes("time")){
+reply = "Current time ready";
+}
+
+if(text.includes("open chat")){
+reply = "Opening chat system";
+openChat();
+}
+
+if(text.includes("open terminal")){
+reply = "Opening terminal";
+openTerminal();
+}
+
 let speech =
-new SpeechSynthesisUtterance(
-"Hello Rahul"
-);
+new SpeechSynthesisUtterance(reply);
 
 speech.lang="hi-IN";
 
@@ -127,6 +179,14 @@ speechSynthesis.speak(speech);
 
 }
 
+}
+
+function openChat(){
+alert("FRIDAY Chat System Ready 🚀");
+}
+
+function openTerminal(){
+alert("FRIDAY Terminal Ready 💻");
 }
 
 </script>
