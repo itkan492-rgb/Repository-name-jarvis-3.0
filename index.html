@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FRIDAY AI</title>
 
+<style>
+
+body{
+background:black;
+color:white;
+font-family:Arial;
+text-align:center;
+padding-top:50px;
+}
+
+h1{
+color:cyan;
+font-size:45px;
+}
+
+button{
+width:220px;
+padding:15px;
+margin:10px;
+font-size:18px;
+background:cyan;
+border:none;
+border-radius:12px;
+}
+
+#status{
+margin-top:20px;
+color:lime;
+font-size:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>FRIDAY AI</h1>
+
+<p>Welcome Rahul 👋</p>
+
+<button onclick="voice()">
+🎤 Start Voice
+</button>
+
+<br>
+
+<button onclick="window.location.href='chat.html'">
+💬 Open Chat
+</button>
+
+<br>
+
+<button onclick="window.location.href='terminal.html'">
+🖥 Open Terminal
+</button>
+
+<div id="status">
+System Ready ✅
+</div>
+
+<script>
+
+function voice(){
+
+document.getElementById("status").innerHTML =
+"Friday Listening... 🎤";
+
+let msg =
+new SpeechSynthesisUtterance(
+"Hello Rahul, Friday AI activated"
+);
+
+speechSynthesis.speak(msg);
+
+}
+
+</script>
+
+</body>
+</html>
