@@ -99,7 +99,15 @@ recognition.onresult = function(event) {
 let command =
 event.results[0][0].transcript;
 
-alert("Aapne bola: " + command);
+let reply = "Maine suna: " + command;
+
+if(command.includes("hello") || command.includes("friday")){
+reply = "Hello Rahul, main Friday AI ready hoon";
+}
+
+speech = new SpeechSynthesisUtterance(reply);
+speech.lang = "hi-IN";
+window.speechSynthesis.speak(speech);
 
 if(command.includes("chat")) {
 window.location.href = "chat.html";
