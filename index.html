@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>FRIDAY AI</title>
 
@@ -12,16 +13,65 @@ background:black;
 color:white;
 font-family:Arial;
 text-align:center;
-padding-top:50px;
+padding-top:30px;
+overflow:hidden;
 }
+
+/* TITLE */
 
 h1{
 color:cyan;
+font-size:40px;
 text-shadow:
 0 0 10px cyan,
 0 0 20px cyan,
 0 0 40px cyan;
 }
+
+/* ORB */
+
+.orb{
+width:180px;
+height:180px;
+background:radial-gradient(circle,#ff00ff,#6600ff);
+border-radius:50%;
+margin:30px auto;
+animation:pulse 2s infinite;
+box-shadow:0 0 40px #ff00ff;
+position:relative;
+}
+
+/* ROTATING RING */
+
+.orb::before{
+content:"";
+position:absolute;
+top:-20px;
+left:-20px;
+width:220px;
+height:220px;
+border:3px solid #ff0066;
+border-radius:50%;
+animation:rotate 4s linear infinite;
+}
+
+/* SMALL DOTS */
+
+.orb::after{
+content:"";
+position:absolute;
+top:-10px;
+left:80px;
+width:20px;
+height:20px;
+background:white;
+border-radius:50%;
+box-shadow:
+0 0 20px white,
+0 0 40px cyan;
+}
+
+/* BUTTONS */
 
 button{
 width:220px;
@@ -31,14 +81,27 @@ border:none;
 border-radius:10px;
 background:cyan;
 font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
 }
+
+button:hover{
+transform:scale(1.05);
+background:#00ffee;
+}
+
+/* STATUS */
 
 .status{
 color:lime;
+font-size:22px;
 margin-top:20px;
-font-size:20px;
-} 
-  @keyframes pulse{
+}
+
+/* ANIMATIONS */
+
+@keyframes pulse{
 0%{
 transform:scale(1);
 }
@@ -48,17 +111,6 @@ transform:scale(1.1);
 100%{
 transform:scale(1);
 }
-}
-.orb::before{
-content:"";
-position:absolute;
-top:-20px;
-left:-20px;
-width:220px;
-height:220px;
-border:2px solid #ff0066;
-border-radius:50%;
-animation:rotate 4s linear infinite;
 }
 
 @keyframes rotate{
@@ -71,12 +123,13 @@ transform:rotate(360deg);
 }
 
 </style>
-
 </head>
 
 <body>
-<div class="orb"></div>
+
 <h1>FRIDAY AI</h1>
+
+<div class="orb"></div>
 
 <p>Welcome Rahul 👋</p>
 
@@ -86,14 +139,14 @@ transform:rotate(360deg);
 
 <br>
 
-<button onclick="window.location.href='chat.html'">
-💬 Open Chat
+<button onclick="window.open('https://chat.openai.com')">
+💬 Open ChatGPT
 </button>
 
 <br>
 
-<button onclick="window.location.href='terminal.html'">
-💻 Open Terminal
+<button onclick="window.open('https://youtube.com')">
+▶ Open YouTube
 </button>
 
 <p class="status">
@@ -102,35 +155,86 @@ System Ready ✅
 
 <script>
 
-function startVoice() {
+function startVoice(){
 
 const recognition =
 new webkitSpeechRecognition();
 
 recognition.lang = "hi-IN";
 
-recognition.onresult = function(event) {
+recognition.onresult = function(event){
 
 let command =
-event.results[0][0].transcript;
+event.results[0][0].transcript.toLowerCase();
 
 let reply = "Maine suna: " + command;
 
-if(command.includes("hello") || command.includes("friday")){
-reply = "Hello Rahul, main Friday AI ready hoon";
+/* HELLO */
+
+if(command.includes("hello") ||
+command.includes("friday")){
+
+reply =
+"Hello Rahul, main Friday AI ready hoon";
 }
 
-let speech = new SpeechSynthesisUtterance(reply);
+/* HOW ARE YOU */
+
+if(command.includes("kaise ho")){
+
+reply =
+"Main bilkul theek hoon Rahul";
+}
+
+/* TIME */
+
+if(command.includes("time")){
+
+reply =
+"Abhi time hai " +
+new Date().toLocaleTimeString();
+}
+
+/* OPEN YOUTUBE */
+
+if(command.includes("youtube")){
+
+window.open("https://youtube.com");
+
+reply =
+"YouTube khol raha hoon";
+}
+
+/* OPEN GOOGLE */
+
+if(command.includes("google")){
+
+window.open("https://google.com");
+
+reply =
+"Google khol raha hoon";
+}
+
+/* OPEN CHATGPT */
+
+if(command.includes("chat")){
+
+window.open("https://chat.openai.com");
+
+reply =
+"ChatGPT khol raha hoon";
+}
+
+/* SPEAK */
+
+let speech =
+new SpeechSynthesisUtterance(reply);
+
 speech.lang = "hi-IN";
+
 window.speechSynthesis.speak(speech);
 
-if(command.includes("chat")) {
-window.location.href = "chat.html";
-}
-
-if(command.includes("terminal")) {
-window.location.href = "terminal.html";
-}
+alert(reply);
 
 };
 
@@ -141,4 +245,4 @@ recognition.start();
 </script>
 
 </body>
-</htm
+</html>
