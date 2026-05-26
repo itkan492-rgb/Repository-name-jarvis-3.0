@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>FRIDAY AI</title>
 
 <style>
@@ -15,26 +17,30 @@ padding-top:50px;
 
 h1{
 color:cyan;
-font-size:45px;
+text-shadow:
+0 0 10px cyan,
+0 0 20px cyan,
+0 0 40px cyan;
 }
 
 button{
 width:220px;
 padding:15px;
 margin:10px;
-font-size:18px;
-background:cyan;
 border:none;
-border-radius:12px;
+border-radius:10px;
+background:cyan;
+font-size:18px;
 }
 
-#status{
-margin-top:20px;
+.status{
 color:lime;
+margin-top:20px;
 font-size:20px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -43,7 +49,7 @@ font-size:20px;
 
 <p>Welcome Rahul 👋</p>
 
-<button onclick="voice()">
+<button onclick="startVoice()">
 🎤 Start Voice
 </button>
 
@@ -56,30 +62,44 @@ font-size:20px;
 <br>
 
 <button onclick="window.location.href='terminal.html'">
-🖥 Open Terminal
+💻 Open Terminal
 </button>
 
-<div id="status">
+<p class="status">
 System Ready ✅
-</div>
+</p>
 
 <script>
 
-function voice(){
+function startVoice() {
 
-document.getElementById("status").innerHTML =
-"Friday Listening... 🎤";
+const recognition =
+new webkitSpeechRecognition();
 
-let msg =
-new SpeechSynthesisUtterance(
-"Hello Rahul, Friday AI activated"
-);
+recognition.lang = "hi-IN";
 
-speechSynthesis.speak(msg);
+recognition.onresult = function(event) {
+
+let command =
+event.results[0][0].transcript;
+
+alert("Aapne bola: " + command);
+
+if(command.includes("chat")) {
+window.location.href = "chat.html";
+}
+
+if(command.includes("terminal")) {
+window.location.href = "terminal.html";
+}
+
+};
+
+recognition.start();
 
 }
 
 </script>
 
 </body>
-</html>
+</htm
