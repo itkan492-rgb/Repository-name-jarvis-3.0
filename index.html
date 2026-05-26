@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+bord<<!DOCTYPE html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>FRIDAY AI</title>
 
 <style>
@@ -13,69 +10,25 @@ background:black;
 color:white;
 font-family:Arial;
 text-align:center;
-padding-top:30px;
 overflow:hidden;
 }
 
-/* Animated Background */
-
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at top left,#ff00ff22,transparent 30%),
-radial-gradient(circle at bottom right,#00ffff22,transparent 30%);
-z-index:-1;
-animation:bgmove 8s infinite alternate;
-}
-
-@keyframes bgmove{
-0%{transform:scale(1);}
-100%{transform:scale(1.1);}
-}
-
-/* FRIDAY Title */
-
 h1{
 color:cyan;
-font-size:40px;
-text-shadow:
-0 0 10px cyan,
-0 0 20px cyan,
-0 0 40px cyan;
-animation:glow 2s infinite alternate;
+margin-top:20px;
+text-shadow:0 0 20px cyan;
 }
-
-@keyframes glow{
-0%{text-shadow:0 0 10px cyan;}
-100%{
-text-shadow:
-0 0 20px cyan,
-0 0 40px #00ffff,
-0 0 80px #00ffff;
-}
-}
-
-/* Orb */
 
 .orb{
 width:180px;
 height:180px;
-background:radial-gradient(circle,#ff00ff,#00ffff);
+margin:40px auto;
 border-radius:50%;
-margin:20px auto;
+background:radial-gradient(circle,#ff00ff,#00ffff);
+box-shadow:0 0 50px #00ffff;
 position:relative;
 animation:pulse 2s infinite;
-box-shadow:
-0 0 40px #ff00ff,
-0 0 80px #00ffff;
 }
-
-/* Rotating Ring */
 
 .orb::before{
 content:"";
@@ -84,7 +37,7 @@ top:-15px;
 left:-15px;
 width:210px;
 height:210px;
-border:3px solid #ff00aa;
+border:3px solid #ff0080;
 border-radius:50%;
 animation:rotate 4s linear infinite;
 }
@@ -100,77 +53,23 @@ animation:rotate 4s linear infinite;
 100%{transform:scale(1);}
 }
 
-/* Buttons */
-
 button{
-width:240px;
+width:220px;
 padding:15px;
 margin:10px;
 border:none;
-border-radius:12px;
+border-radius:10px;
 background:cyan;
 font-size:18px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
 }
-
-button:hover{
-background:#00ffff;
-transform:scale(1.05);
-box-shadow:0 0 20px cyan;
-}
-
-/* Status */
 
 .status{
 color:lime;
+font-size:20px;
 margin-top:20px;
-font-size:22px;
-text-shadow:0 0 10px lime;
-}
-
-/* AI Feature Box */
-
-.features{
-margin-top:40px;
-width:90%;
-max-width:500px;
-margin-left:auto;
-margin-right:auto;
-background:#111;
-padding:20px;
-border-radius:20px;
-box-shadow:0 0 20px #00ffff44;
-text-align:left;
-}
-
-.features h2{
-text-align:center;
-color:#00ffff;
-}
-
-.features ul{
-list-style:none;
-padding:0;
-}
-
-.features li{
-padding:10px;
-font-size:18px;
-border-bottom:1px solid #333;
-}
-
-/* Footer */
-
-.footer{
-margin-top:30px;
-font-size:14px;
-color:#888;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -187,13 +86,13 @@ color:#888;
 
 <br>
 
-<button onclick="openChat()">
+<button>
 💬 Open Chat
 </button>
 
 <br>
 
-<button onclick="openTerminal()">
+<button>
 💻 Open Terminal
 </button>
 
@@ -201,153 +100,32 @@ color:#888;
 System Ready ✅
 </p>
 
-<!-- FEATURES -->
-
-<div class="features">
-
-<h2>🚀 Advanced Features</h2>
-
-<ul>
-
-<li>🔥 AI Voice Assistant</li>
-
-<li>🧠 Memory System</li>
-
-<li>🎤 Hindi Voice Control</li>
-
-<li>💻 Real Terminal Support</li>
-
-<li>📂 File Manager</li>
-
-<li>🌦 Weather API Ready</li>
-
-<li>📞 Call/SMS Control Ready</li>
-
-<li>🔒 Security System</li>
-
-<li>👁 Camera AI Vision Ready</li>
-
-<li>🤖 AI Agent Mode</li>
-
-<li>📱 Android APK Ready</li>
-
-<li>⚡ Continuous Listening</li>
-
-<li>🌐 Custom API Support</li>
-
-<li>🛡 Advanced Orb Animation</li>
-
-</ul>
-
-</div>
-
-<div class="footer">
-FRIDAY AI v3.0 🚀
-</div>
-
 <script>
-
-/* Voice Start */
 
 function startVoice(){
 
-const recognition =
+let recognition =
 new webkitSpeechRecognition();
 
-recognition.lang = "hi-IN";
+recognition.lang="hi-IN";
 
 recognition.start();
 
-speak("Friday AI listening");
+recognition.onresult=function(event){
 
-recognition.onresult = function(event){
-
-let command =
-event.results[0][0].transcript.toLowerCase();
-
-document.body.style.background = "black";
-
-if(command.includes("hello") ||
-command.includes("friday")){
-
-speak("Hello Rahul, main Friday AI ready hoon");
-
-}
-
-if(command.includes("chat")){
-
-openChat();
-
-}
-
-if(command.includes("terminal")){
-
-openTerminal();
-
-}
-
-if(command.includes("time")){
-
-let t = new Date().toLocaleTimeString();
-
-speak("Time is " + t);
-
-}
-
-if(command.includes("weather")){
-
-speak("Weather API not connected yet");
-
-}
-
-if(command.includes("open youtube")){
-
-window.open("https://youtube.com");
-
-}
-
-if(command.includes("open google")){
-
-window.open("https://google.com");
-
-}
-
-if(command.includes("open github")){
-
-window.open("https://github.com");
-
-}
-
-}
-
-}
-
-/* Speak Function */
-
-function speak(text){
+let text =
+event.results[0][0].transcript;
 
 let speech =
-new SpeechSynthesisUtterance(text);
+new SpeechSynthesisUtterance(
+"Hello Rahul"
+);
 
-speech.lang = "hi-IN";
+speech.lang="hi-IN";
 
-window.speechSynthesis.speak(speech);
-
-}
-
-/* Chat */
-
-function openChat(){
-
-alert("FRIDAY AI Chat Opened 🚀");
+speechSynthesis.speak(speech);
 
 }
-
-/* Terminal */
-
-function openTerminal(){
-
-alert("Terminal Connected 💻");
 
 }
 
