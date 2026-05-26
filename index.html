@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>FRIDAY AI</title>
 
+<style>
+body{
+margin:0;
+padding:0;
+background:black;
+font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+overflow:hidden;
+color:white;
+}
+
+.container{
+text-align:center;
+}
+
+.orb{
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(circle,#00ffff,#ff00ff);
+margin:auto;
+box-shadow:0 0 50px cyan;
+animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+h1{
+color:cyan;
+text-shadow:0 0 20px cyan;
+}
+
+button{
+width:220px;
+padding:15px;
+margin:10px;
+border:none;
+border-radius:10px;
+background:cyan;
+font-size:18px;
+}
+
+.status{
+color:lime;
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="orb"></div>
+
+<h1>FRIDAY AI</h1>
+
+<p>Welcome Rahul 👋</p>
+
+<button onclick="startVoice()">🎤 Start Voice</button>
+
+<br>
+
+<button onclick="alert('Chat Opened')">💬 Open Chat</button>
+
+<br>
+
+<button onclick="alert('Terminal Opened')">💻 Open Terminal</button>
+
+<p class="status">System Ready ✅</p>
+
+</div>
+
+<script>
+
+function startVoice(){
+
+let speech = new SpeechSynthesisUtterance(
+"Hello Rahul, Friday AI activated"
+);
+
+speech.lang="en-US";
+
+speechSynthesis.speak(speech);
+
+}
+
+</script>
+
+</body>
+</html>
